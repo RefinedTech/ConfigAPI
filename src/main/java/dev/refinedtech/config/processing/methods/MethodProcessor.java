@@ -1,8 +1,8 @@
-package dev.refinedtech.config.processing;
+package dev.refinedtech.config.processing.methods;
 
 import dev.refinedtech.config.annotations.comment.Comment;
 import dev.refinedtech.config.annotations.comment.Comments;
-import dev.refinedtech.config.processing.info.MethodInfo;
+import dev.refinedtech.config.processing.methods.info.MethodInfo;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

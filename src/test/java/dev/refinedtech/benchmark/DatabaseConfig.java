@@ -1,11 +1,12 @@
-import dev.refinedtech.config.annotations.NotSection;
-import dev.refinedtech.config.annotations.alias.Alias;
+package dev.refinedtech.benchmark;
+
+import dev.refinedtech.config.annotations.Ignored;
 import dev.refinedtech.config.annotations.alias.GetterAlias;
 import dev.refinedtech.config.annotations.comment.Comment;
 
-@Alias("database")
-@NotSection
+@Ignored
 public interface DatabaseConfig {
+
     enum DatabaseType {
         MYSQL,
         REDIS,
@@ -22,6 +23,7 @@ public interface DatabaseConfig {
         return DatabaseType.MYSQL;
     }
 
+    @Ignored
     default DatabaseConnection getDatabase() {
         return new DatabaseConnection(getPort(), getUrl(), getUser(), getPass());
     }
@@ -31,6 +33,8 @@ public interface DatabaseConfig {
     default int getPort() {
         return 3316;
     }
+
+    void setPort(int port);
 
     @Comment("The url to connect to")
     @Comment("Default value: ${DEFAULT}")
@@ -48,5 +52,22 @@ public interface DatabaseConfig {
     @Comment("Default value: ${DEFAULT}")
     default String getPass() {
         return "";
+    }
+
+    void save();
+
+    Test getTest();
+
+    interface Test {
+        long save();
+        void load();
+
+        default String getStuff() {
+            return "LALALALLAA";
+        }
+
+        interface Test2 {
+            void save();
+        }
     }
 }
