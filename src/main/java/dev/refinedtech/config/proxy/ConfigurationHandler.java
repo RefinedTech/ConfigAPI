@@ -50,7 +50,7 @@ public final class ConfigurationHandler implements InvocationHandler {
                 if (returnType.isArray() && returnType.getComponentType().getEnclosingClass() == currentClass.getType()) {
                     Object defaultObj = this.invokeDefault(proxy, method, args, currentClass.getType());
                     if (defaultObj != null) {
-                        ArrayProxy<?> arrayProxy = this.childArrayProxies.computeIfAbsent(method, m -> {
+                        yield this.childArrayProxies.computeIfAbsent(method, m -> {
                             List<String> proxyPath = new ArrayList<>();
                             proxyPath.add(info.getName());
                             proxyPath.addAll(finalPath);
@@ -61,9 +61,7 @@ public final class ConfigurationHandler implements InvocationHandler {
                                 proxyPath,
                                 this
                             );
-                        });
-
-                        yield arrayProxy.getObjects();
+                        }).getObjects();
                     }
                 }
 
