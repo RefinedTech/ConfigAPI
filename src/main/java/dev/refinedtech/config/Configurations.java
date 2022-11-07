@@ -6,6 +6,7 @@ import dev.refinedtech.config.proxy.ConfigurationHandler;
 import dev.refinedtech.config.io.ConfigurationIOHandler;
 import dev.refinedtech.config.proxy.TemporaryHandler;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 public final class Configurations {
@@ -18,11 +19,7 @@ public final class Configurations {
     public static <T> T createConfig(Class<T> clazz, ConfigurationIOHandler ioHandler) {
         TemporaryHandler temporaryHandler = new TemporaryHandler();
 
-        T proxy = (T) Proxy.newProxyInstance(
-            Thread.currentThread().getContextClassLoader(),
-            new Class[] { clazz },
-            temporaryHandler
-        );
+        T proxy = createProxy(clazz, temporaryHandler);
 
         ClassProcessor classProcessor = new ClassProcessor(new MethodProcessorImpl(proxy));
 
@@ -36,7 +33,7 @@ public final class Configurations {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T manuallyCreate(Class<T> clazz, ConfigurationHandler handler) {
+    public static <T> T createProxy(Class<T> clazz, InvocationHandler handler) {
         return (T) Proxy.newProxyInstance(
             Thread.currentThread().getContextClassLoader(),
             new Class[] { clazz },

@@ -98,6 +98,10 @@ public class TestConfig {
 
             });
 
+        DatabaseConfig.Test[] tests = config.getTests();
+        tests[0].getStuff();
+        tests[1].getStuff();
+
         DatabaseConfig.Test test = config.getTest();
         System.out.println(test.getStuff());
         System.out.println(test == config.getTest());

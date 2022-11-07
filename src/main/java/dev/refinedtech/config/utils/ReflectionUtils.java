@@ -3,7 +3,7 @@ package dev.refinedtech.config.utils;
 import dev.refinedtech.config.annotations.Ignored;
 import dev.refinedtech.config.annotations.alias.Alias;
 
-import java.lang.reflect.Member;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +51,22 @@ public final class ReflectionUtils {
         List<String> res = new ArrayList<>(path);
         Collections.reverse(res);
         return res;
+    }
+
+    public static Object[] arrayFromObject(Object obj) {
+        if (obj == null) return null;
+        if (!obj.getClass().isArray()) return null;
+
+        if (obj instanceof Object[])
+            return (Object[]) obj;
+
+        int length = Array.getLength(obj);
+        Object[] arr = new Object[length];
+        for (int i = 0; i < length; i++) {
+            arr[i] = Array.get(obj, i);
+        }
+
+        return arr;
     }
 
 }

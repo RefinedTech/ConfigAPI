@@ -58,6 +58,11 @@ public interface DatabaseConfig {
 
     Test getTest();
 
+    // @NoWrite
+    default Test[] getTests() {
+        return new Test[12];
+    }
+
     interface Test {
         long save();
         void load();

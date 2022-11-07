@@ -14,3 +14,7 @@ w
 Gsrc/main/java/dev/refinedtech/config/annotations/alias/GetterAlias.java,b\a\ba5b983f5561729696c51b0eda8a53a856a4f992
 w
 Gsrc/main/java/dev/refinedtech/config/annotations/alias/SetterAlias.java,8\a\8a4e50799f376489f420048ac83557fd61ba29bd
+m
+=src/main/java/dev/refinedtech/config/annotations/Ignored.java,c\2\c233f81fe26472dd12828a46b8989d5c5794318f
+|
+Lsrc/main/java/dev/refinedtech/config/processing/methods/ProcessedMethod.java,d\3\d3142e079cb474da99bea0e66d50155783c4c73b

@@ -8,14 +8,17 @@ import dev.refinedtech.config.processing.methods.info.MethodInfo;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public final class ConfigurationHandler implements InvocationHandler {
 
     private final ProcessedClass processedClass;
     private final ConfigurationIOHandler ioHandler;
 
-    private final HashMap<Class<?>, Object> childProxies = new HashMap<>();
+    private final HashMap<Method, Object> childProxies = new HashMap<>();
+    private final HashMap<Method, ArrayProxy<?>> childArrayProxies = new HashMap<>();
 
     public ConfigurationHandler(ProcessedClass processedClass, ConfigurationIOHandler ioHandler) {
         this.processedClass = processedClass;
@@ -26,6 +29,10 @@ public final class ConfigurationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        return this.invoke(proxy, method, args, null);
+    }
+
+    Object invoke(Object proxy, Method method, Object[] args, List<String> path) throws Throwable {
         ProcessedClass currentClass = this.processedClass.getProcessedClass(method);
         ProcessedMethod processedMethod = currentClass.getProcessedMethod(method);
 
@@ -33,35 +40,49 @@ public final class ConfigurationHandler implements InvocationHandler {
             return this.invokeDefault(proxy, method, args, currentClass.getType());
         }
 
-
-
         MethodInfo info = processedMethod.info();
+        final List<String> finalPath = path == null ? info.getPathNames() : path;
 
         Object toReturn = switch (info.getType()) {
             case GETTER -> {
 
                 Class<?> returnType = method.getReturnType();
-                Object child = this.childProxies.get(returnType);
+                if (returnType.isArray() && returnType.getComponentType().getEnclosingClass() == currentClass.getType()) {
+                    Object defaultObj = this.invokeDefault(proxy, method, args, currentClass.getType());
+                    if (defaultObj != null) {
+                        ArrayProxy<?> arrayProxy = this.childArrayProxies.computeIfAbsent(method, m -> {
+                            List<String> proxyPath = new ArrayList<>();
+                            proxyPath.add(info.getName());
+                            proxyPath.addAll(finalPath);
+
+                            return new ArrayProxy<>(
+                                defaultObj,
+                                returnType.getComponentType(),
+                                proxyPath,
+                                this
+                            );
+                        });
+
+                        yield arrayProxy.getObjects();
+                    }
+                }
+
+                Object child = this.childProxies.get(method);
                 if (child != null) {
                     yield child;
                 }
 
                 if (returnType.getEnclosingClass() == currentClass.getType()) {
-                    Object obj = Configurations.manuallyCreate(
+                    Object obj = Configurations.createProxy(
                         returnType,
                         this
                     );
 
-                    this.childProxies.put(returnType, obj);
+                    this.childProxies.put(method, obj);
                     yield obj;
                 }
 
-                Object value = this.ioHandler.get(info.getPathNames(), info.getName());
-                if (value != null) {
-                    yield value;
-                }
-
-                yield null;
+                yield this.ioHandler.get(finalPath, info.getName());
             }
             case SETTER -> {
                 if (args == null || args.length < 1) {
@@ -73,7 +94,7 @@ public final class ConfigurationHandler implements InvocationHandler {
                     );
                 }
 
-                this.ioHandler.set(info.getPathNames(), info.getName(), args[0]);
+                this.ioHandler.set(finalPath, info.getName(), args[0]);
 
                 yield null;
             }
