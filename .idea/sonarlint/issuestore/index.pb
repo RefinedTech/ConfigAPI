@@ -24,8 +24,6 @@ o
 Lsrc/main/java/dev/refinedtech/config/processing/methods/info/MethodInfo.java,a\9\a976ffaa7eae6bfcd9aaabe18ad8691a819527d4
 {
 Ksrc/main/java/dev/refinedtech/config/processing/classes/ClassProcessor.java,9\c\9c603a13ac233f8087b031e4b7bf3449107796b8
-{
-Ksrc/main/java/dev/refinedtech/config/processing/classes/ProcessedClass.java,b\d\bddaab125da0160a13056b26ff922b7f0db1bafd
 |
 Lsrc/main/java/dev/refinedtech/config/processing/methods/MethodProcessor.java,3\d\3d5ec10c492b00fae06b97a112f929be3adea98e
 k
@@ -38,3 +36,17 @@ k
 ;src/test/java/dev/refinedtech/benchmark/DatabaseConfig.java,8\2\8286346d97149ae62ed546bafc33b57c2f57a17e
 p
 @src/main/java/dev/refinedtech/config/proxy/TemporaryHandler.java,7\8\787fd3032f093f9c5f302df02b04867c2fca92ee
+s
+Csrc/main/java/dev/refinedtech/config/io/ConfigurationIOHandler.java,e\7\e76cce21f493798c408d449fac911a02adacb0b0
+t
+Dsrc/main/java/dev/refinedtech/config/proxy/ConfigurationHandler.java,6\4\645ea37edba59767ab7a35a566447c3f530deada
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+Q
+!src/test/java/DatabaseConfig.java,3\3\3366bdcca8d4a29e648ff865eb4a83b68ff5836d
+U
+%src/test/java/DatabaseConnection.java,0\1\01064412ae5a0ef4ac559fbd7812365e773aaccc
+M
+src/test/java/TestConfig.java,7\0\70fd9b62513be29ee41c0c22f69d850487f6827a
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec

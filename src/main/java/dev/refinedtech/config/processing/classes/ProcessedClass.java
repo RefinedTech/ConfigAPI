@@ -3,8 +3,7 @@ package dev.refinedtech.config.processing.classes;
 import dev.refinedtech.config.processing.methods.ProcessedMethod;
 
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class ProcessedClass {
 
@@ -33,8 +32,12 @@ public final class ProcessedClass {
         return this.methods.get(method);
     }
 
-    public Map<Class<?>, ProcessedClass> getChildren() {
-        return children;
+    public Set<ProcessedClass> getChildren() {
+        return new HashSet<>(this.children.values());
+    }
+
+    public Set<ProcessedMethod> getMethods() {
+        return new HashSet<>(this.methods.values());
     }
 
     @Override
