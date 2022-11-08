@@ -86,12 +86,12 @@ public class TestConfig {
                 }
 
                 @Override
-                public void save(ProcessedClass processedClass) {
+                public void save(ProcessedClass processedClass, List<String> finalPath) {
                     System.out.println("Saving: " + String.join(".", processedClass.getPathNames()));
                 }
 
                 @Override
-                public void load(ProcessedClass processedClass) {
+                public void load(ProcessedClass processedClass, List<String> finalPath) {
                     System.out.println("Loading: " + String.join(".", processedClass.getPathNames()));
                 }
 

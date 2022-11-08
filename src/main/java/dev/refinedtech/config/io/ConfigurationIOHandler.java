@@ -19,8 +19,8 @@ public abstract class ConfigurationIOHandler {
 
     public abstract void set(List<String> pathNames, String name, Object arg);
 
-    public abstract void save(ProcessedClass processedClass);
-    public abstract void load(ProcessedClass processedClass);
+    public abstract void save(ProcessedClass processedClass, List<String> finalPath);
+    public abstract void load(ProcessedClass processedClass, List<String> finalPath);
 
     protected File getFile() {
         return this.file;

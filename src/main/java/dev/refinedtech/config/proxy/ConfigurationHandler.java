@@ -98,7 +98,7 @@ public final class ConfigurationHandler implements InvocationHandler {
             }
             case SAVE -> {
                 long start = System.nanoTime();
-                this.ioHandler.save(currentClass);
+                this.ioHandler.save(currentClass, finalPath);
                 long end = System.nanoTime();
 
                 if (method.getReturnType() == long.class
@@ -109,7 +109,7 @@ public final class ConfigurationHandler implements InvocationHandler {
             }
             case LOAD -> {
                 long start = System.nanoTime();
-                this.ioHandler.load(currentClass);
+                this.ioHandler.load(currentClass, finalPath);
                 long end = System.nanoTime();
                 if (method.getReturnType() == long.class
                     || method.getReturnType() == Long.class) {
