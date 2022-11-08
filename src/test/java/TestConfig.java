@@ -1,5 +1,3 @@
-package dev.refinedtech.benchmark;
-
 import dev.refinedtech.config.Configurations;
 import dev.refinedtech.config.processing.classes.ProcessedClass;
 import dev.refinedtech.config.io.ConfigurationIOHandler;
@@ -13,7 +11,7 @@ public class TestConfig {
     public static void main(String[] args) throws NoSuchMethodException {
 //
 //        Object proxy = Proxy.newProxyInstance(Thread.currentThread()
-//                                                    .getContextClassLoader(), new Class[]{dev.refinedtech.benchmark.DatabaseConfig.class}, new InvocationHandler() {
+//                                                    .getContextClassLoader(), new Class[]{DatabaseConfig.class}, new InvocationHandler() {
 //            @Override
 //            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 //                return null;
@@ -21,9 +19,9 @@ public class TestConfig {
 //        });
 //
 //        ClassProcessor classProcessor = new ClassProcessor(methodProcessor);
-//        System.out.println(classProcessor.process(dev.refinedtech.benchmark.DatabaseConfig.class));
+//        System.out.println(classProcessor.process(DatabaseConfig.class));
 //
-//        Method method = dev.refinedtech.benchmark.DatabaseConfig.class.getDeclaredMethod("getDatabaseType");
+//        Method method = DatabaseConfig.class.getDeclaredMethod("getDatabaseType");
 
 //        System.out.println(methodProcessor.processMethod(method));
 
@@ -31,14 +29,14 @@ public class TestConfig {
 //
 //        Object proxy = Proxy.newProxyInstance(
 //            Thread.currentThread().getContextClassLoader(),
-//            new Class[]{dev.refinedtech.benchmark.DatabaseConfig.class},
+//            new Class[]{DatabaseConfig.class},
 //            temporaryHandler
 //        );
 //
 //        ClassProcessor classProcessor = new ClassProcessor(new MethodProcessorImpl(proxy));
 //
 //        ConfigurationHandler handler = new ConfigurationHandler(
-//            classProcessor.process(dev.refinedtech.benchmark.DatabaseConfig.class),
+//            classProcessor.process(DatabaseConfig.class),
 //            new ConfigurationIOHandler(new File("./out.txt")) {
 //                @Override
 //                public void init(ProcessedClass processedClass) {

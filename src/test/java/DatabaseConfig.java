@@ -1,5 +1,3 @@
-package dev.refinedtech.benchmark;
-
 import dev.refinedtech.config.annotations.Ignored;
 import dev.refinedtech.config.annotations.alias.GetterAlias;
 import dev.refinedtech.config.annotations.comment.Comment;
